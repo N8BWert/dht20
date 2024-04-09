@@ -16,8 +16,10 @@ readme = "README.md"
 embedded_hal_0_2 = { package = "embedded-hal", version = "0.2.7", optional = true }
 embedded-hal = { version = "~1.0", optional = true }
 log = "0.4.20"
+defmt = { version = "0.3.6", optional = true }
 
 [features]
 default = ["embedded-hal-0"]
+defmt = ["dep:defmt"]
 embedded-hal-0 = ["dep:embedded_hal_0_2"]
 embedded-hal-1 = ["dep:embedded-hal"]

@@ -38,7 +38,8 @@ pub struct Dht20<I2C, DELAY, E> where
     delay: DELAY,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Copy, Clone, Debug, PartialEq)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub struct Reading {
     pub temp: f32,
     pub hum: f32,
