@@ -16,7 +16,8 @@ use embedded_hal_0_2::blocking::delay::DelayMs;
 #[cfg(feature = "embedded-hal-0")]
 use embedded_hal_0_2::blocking::i2c::{Read, Write, WriteRead};
 
-use log::info;
+/// I2C Address of the DHT 20 Module
+pub const DHT20_ADDRESS: u8 = 0x38;
 
 #[cfg(feature = "embedded-hal-1")]
 pub struct Dht20<I2C, DELAY, E> where
@@ -91,7 +92,6 @@ impl<I2C, DELAY, E> Dht20<I2C, DELAY, E> where
     fn reset(&mut self) -> Result<(), E> {
         let status = self.read_status()?;
         if status & 0x18 != 0x18 {
-            info!("resetting");
             self.write_data(&[0x1B, 0, 0])?;
             self.write_data(&[0x1C, 0, 0])?;
             self.write_data(&[0x1E, 0, 0])?;
@@ -156,7 +156,6 @@ impl<I2C, DELAY, E> Dht20<I2C, DELAY, E> where
     fn reset(&mut self) -> Result<(), E> {
         let status = self.read_status()?;
         if status & 0x18 != 0x18 {
-            info!("resetting");
             self.write_data(&[0x1B, 0, 0])?;
             self.write_data(&[0x1C, 0, 0])?;
             self.write_data(&[0x1E, 0, 0])?;
